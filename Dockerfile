@@ -22,13 +22,15 @@ RUN pip install -r requirements.txt
 #Make folder structure and copy application code
 RUN mkdir app
 COPY app app/
-COPY ["microblog.py", "./"]
+COPY [".flaskenv", "./"]
 
 #Set environment variable so that flask knows the default file to look for at the time of run.
-ENV FLASK_APP=microblog.py
+ENV FLASK_APP=app/app.py
 
 #Exposed port 5000 for port forwarding
 EXPOSE 5000
 
+ENTRYPOINT [ "python" ]
+
 #Command to run the application
-CMD [ "flask", "run" ]
+CMD [ "app/app.py" ]
